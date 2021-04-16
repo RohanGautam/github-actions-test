@@ -51,9 +51,9 @@ jobs:
       - name: build for OSX
         run: ./build/build-osx.sh
         # run: cd build && ./build-osx.sh
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          files: release/*
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     files: release/*
