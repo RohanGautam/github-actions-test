@@ -53,7 +53,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: ls
       - name: build for OSX
-        run: ./build/build-osx.sh
+        run: ./build/install-osxcross.sh  && ./build/build-osx.sh
         # run: cd build && ./build-osx.sh
       # - name: Release
       #   uses: softprops/action-gh-release@v1
