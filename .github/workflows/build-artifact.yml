@@ -34,7 +34,8 @@ jobs:
         run: |
           cross build --target ${{ matrix.target }} --release
           mkdir -p release
-          tar -cJf release/github-actions-test.${{ steps.get_version.outputs.version }}.${{ matrix.target }}.tar.xz github-actions-test
+          cd target/release/${{ matrix.target }}
+          tar -cJf ../../release/github-actions-test.${{ steps.get_version.outputs.version }}.${{ matrix.target }}.tar.xz github-actions-test
 
       - name: Release
         uses: softprops/action-gh-release@v1
