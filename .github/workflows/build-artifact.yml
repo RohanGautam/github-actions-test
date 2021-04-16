@@ -13,40 +13,41 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  # build-cross:
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     RUST_BACKTRACE: full
-  #   strategy:
-  #     matrix:
-  #       target:
-  #         - x86_64-unknown-linux-musl
-  #         - x86_64-unknown-linux-gnu
+  build-cross:
+    runs-on: ubuntu-latest
+    env:
+      RUST_BACKTRACE: full
+    strategy:
+      matrix:
+        target:
+          - x86_64-unknown-linux-musl
+          - x86_64-unknown-linux-gnu
 
-  #   steps:
-  #     - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-  #     - name: Install cross
-  #       run: cargo install cross
+      - name: Install cross
+        run: cargo install cross
 
-  #     - id: get_version
-  #       uses: battila7/get-version-action@v2
+      - id: get_version
+        uses: battila7/get-version-action@v2
 
-  #     - run: echo ${{ steps.get_version.outputs.version }}
+      - run: echo ${{ steps.get_version.outputs.version }}
 
-  #     - name: Build and package ${{ matrix.target }}
-  #       timeout-minutes: 120
-  #       run: |
-  #         cross build --target ${{ matrix.target }} --release
-  #         mkdir -p release
-  #         tar -cJf release/github-actions-test.${{ steps.get_version.outputs.version }}.${{ matrix.target }}.tar.xz target/${{ matrix.target }}/release/github-actions-test
+      - name: Build and package ${{ matrix.target }}
+        timeout-minutes: 120
+        run: |
+          cross build --target ${{ matrix.target }} --release
+          mkdir -p release
+          tar -cJf release/github-actions-test.${{ steps.get_version.outputs.version }}.${{ matrix.target }}.tar.xz target/${{ matrix.target }}/release/github-actions-test
 
-  #     - name: Release
-  #       uses: softprops/action-gh-release@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         files: release/*
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: release/*
+
   build-osx:
     runs-on: ubuntu-latest
     steps:
@@ -55,9 +56,9 @@ jobs:
       - name: build for OSX
         run: ./build/install-osxcross.sh  && ./build/build-osx.sh
         # run: cd build && ./build-osx.sh
-      # - name: Release
-      #   uses: softprops/action-gh-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     files: release/*
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: release/*
