@@ -27,4 +27,5 @@ $PATH
 cd ..
 cargo build --release --target x86_64-apple-darwin
 mkdir -p release
+ls
 tar -cJf release/github-actions-test.xyz.x86_64-apple-darwin.tar.xz target/x86_64-apple-darwin/release/github-actions-test
