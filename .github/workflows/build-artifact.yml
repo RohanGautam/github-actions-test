@@ -62,9 +62,8 @@ jobs:
         mkdir -p release
         tar -cJf release/github-actions-test.${{ steps.get_version.outputs.version }}.x86_64-apple-darwin.tar.xz target/x86_64-apple-darwin/release/github-actions-test
     - name: Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          files: release/
-
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        files: release/
