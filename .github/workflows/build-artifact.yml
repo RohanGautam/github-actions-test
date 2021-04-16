@@ -23,11 +23,18 @@ jobs:
 
       - name: Install cross
         run: cargo install cross
+      - name: Print tag
+        run: echo ${{ github.event.release.tag_name }}
 
-      - name: Build ${{ matrix.target }}
+      - name: Build and package ${{ matrix.target }}
         timeout-minutes: 120
-        run: cross build --target ${{ matrix.target }} --release
+        run: |
+          cross build --target ${{ matrix.target }} --release
+          mkdir -p release
+          tar -cJf release/github-actions-test.${{ github.event.release.tag_name }}.${{ matrix.target }}.tar.xz github-actions-test
+
       - name: Release
         uses: softprops/action-gh-release@v1
+        files: release/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
