@@ -13,4 +13,4 @@ cd CUR_DIR
 PATH="$(pwd)/osxcross/target/bin:$PATH" 
 cargo build --target x86_64-apple-darwin
 mkdir -p release
-tar -cJf release/github-actions-test.${{ steps.get_version.outputs.version }}.x86_64-apple-darwin.tar.xz target/x86_64-apple-darwin/release/github-actions-test
+tar -cJf release/github-actions-test.xyz.x86_64-apple-darwin.tar.xz target/x86_64-apple-darwin/release/github-actions-test

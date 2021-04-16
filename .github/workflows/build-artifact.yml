@@ -46,11 +46,9 @@ jobs:
   build-osx:
     runs-on: ubuntu-latest
     steps:
-      - id: get_version
-        uses: battila7/get-version-action@v2
       - run: ls
       - name: build for OSX
-        run: ./build/build-osx.sh
+        run: cd build && ./build-osx.sh
       - name: Release
         uses: softprops/action-gh-release@v1
         env:
