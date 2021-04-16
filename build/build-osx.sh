@@ -20,7 +20,10 @@ mv MacOSX10.10.sdk.tar.xz tarballs/
 UNATTENDED=yes OSX_VERSION_MIN=10.7 ./build.sh
 PATH="$(pwd)/osxcross/target/bin:$PATH" 
 
+echo "the path is"
+$PATH
+
 ## begin compilation
-cargo build --target x86_64-apple-darwin
+cargo build --release --target x86_64-apple-darwin
 mkdir -p release
 tar -cJf release/github-actions-test.xyz.x86_64-apple-darwin.tar.xz target/x86_64-apple-darwin/release/github-actions-test
