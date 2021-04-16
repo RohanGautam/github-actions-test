@@ -24,6 +24,7 @@ echo "the path is"
 $PATH
 
 ## begin compilation
+cd ..
 cargo build --release --target x86_64-apple-darwin
 mkdir -p release
 tar -cJf release/github-actions-test.xyz.x86_64-apple-darwin.tar.xz target/x86_64-apple-darwin/release/github-actions-test
