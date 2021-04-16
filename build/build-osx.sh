@@ -21,7 +21,7 @@ UNATTENDED=yes OSX_VERSION_MIN=10.7 ./build.sh
 PATH="$CUR_DIR/osxcross/target/bin:$PATH" 
 
 ## begin compilation
-cd {CUR_DIR} && cargo build --release --target x86_64-apple-darwin
+cd ${CUR_DIR} && cargo build --release --target x86_64-apple-darwin
 mkdir -p ${CUR_DIR}/release
 ls ${CUR_DIR}
 tar -cJf ${CUR_DIR}/release/github-actions-test.xyz.x86_64-apple-darwin.tar.xz ${CUR_DIR}target/x86_64-apple-darwin/release/github-actions-test
