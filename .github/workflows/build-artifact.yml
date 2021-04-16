@@ -1,5 +1,10 @@
 name: Build releases
 
+on:
+  push:
+    tags:
+      - v*
+
 env:
   CARGO_TERM_COLOR: always
 
