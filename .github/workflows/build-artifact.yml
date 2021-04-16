@@ -54,7 +54,7 @@ jobs:
         mv MacOSX10.10.sdk.tar.xz tarballs/
         UNATTENDED=yes OSX_VERSION_MIN=10.7 ./build.sh
     - id: get_version
-        uses: battila7/get-version-action@v2
+      uses: battila7/get-version-action@v2
     - name: build for OSX
       run: |
         PATH="$(pwd)/osxcross/target/bin:$PATH" \
