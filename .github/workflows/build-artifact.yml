@@ -23,15 +23,18 @@ jobs:
 
       - name: Install cross
         run: cargo install cross
-      - name: Print tag
-        run: echo ${{ github.event.release.tag_name }}
+
+      - id: get_version
+        uses: battila7/get-version-action@v2
+
+      - run: echo ${{ steps.get_version.outputs.version }}
 
       - name: Build and package ${{ matrix.target }}
         timeout-minutes: 120
         run: |
           cross build --target ${{ matrix.target }} --release
           mkdir -p release
-          tar -cJf release/github-actions-test.${{ github.event.release.tag_name }}.${{ matrix.target }}.tar.xz github-actions-test
+          tar -cJf release/github-actions-test.${{ steps.get_version.outputs.version }}.${{ matrix.target }}.tar.xz github-actions-test
 
       - name: Release
         uses: softprops/action-gh-release@v1

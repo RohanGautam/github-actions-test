@@ -6,7 +6,7 @@ git tag v0.1.0
 # check if the the ag was applied to latest commit
 git log --oneline
 # then push (it doesn't push tags by default)
-git push --tags
+git push && git push --tags
 ```
 
 ## references
