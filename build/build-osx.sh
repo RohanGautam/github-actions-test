@@ -29,7 +29,7 @@ echo "done 🤖"
 #     cargo build --release --target x86_64-apple-darwin
 
 cd ${CUR_DIR} && 
-    PATH="$(pwd)/osxcross/target/bin:$PATH" \
+    PATH="$CUR_DIR/osxcross/target/bin:$PATH" \
     CC=o64-clang \
     CXX=o64-clang++ \
     LIBZ_SYS_STATIC=1 \
