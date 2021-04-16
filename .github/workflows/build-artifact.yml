@@ -1,0 +1,24 @@
+name: Build releases
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-cross:
+    runs-on: ubuntu-latest
+    env:
+      RUST_BACKTRACE: full
+    strategy:
+      matrix:
+        target:
+          - x86_64-unknown-linux-musl
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install cross
+        run: cargo install cross
+
+      - name: Build ${{ matrix.target }}
+        timeout-minutes: 120
+        run: cross build --target ${{ matrix.target }} --release
