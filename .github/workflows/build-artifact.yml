@@ -17,6 +17,7 @@ jobs:
       matrix:
         target:
           - x86_64-unknown-linux-musl
+          - x86_64-unknown-linux-gnu
 
     steps:
       - uses: actions/checkout@v2
@@ -42,3 +43,28 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: release/*
+  build-osx:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Set up OSX compilation toolchain
+      run: |
+        git clone https://github.com/tpoechtrager/osxcross
+        cd osxcross
+        wget -nc https://s3.dockerproject.org/darwin/v2/MacOSX10.10.sdk.tar.xz
+        mv MacOSX10.10.sdk.tar.xz tarballs/
+        UNATTENDED=yes OSX_VERSION_MIN=10.7 ./build.sh
+    - id: get_version
+        uses: battila7/get-version-action@v2
+    - name: build for OSX
+      run: |
+        PATH="$(pwd)/osxcross/target/bin:$PATH" \
+        cargo build --target x86_64-apple-darwin
+        mkdir -p release
+        tar -cJf release/github-actions-test.${{ steps.get_version.outputs.version }}.x86_64-apple-darwin.tar.xz target/x86_64-apple-darwin/release/github-actions-test
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: release/
+
