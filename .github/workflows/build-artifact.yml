@@ -24,3 +24,7 @@ jobs:
       - name: Build ${{ matrix.target }}
         timeout-minutes: 120
         run: cross build --target ${{ matrix.target }} --release
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
