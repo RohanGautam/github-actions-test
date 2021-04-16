@@ -52,9 +52,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: ls
+      - id: get_version
+        uses: battila7/get-version-action@v2
+
       - name: build for OSX
-        run: ./build/install-osxcross.sh  && ./build/build-osx.sh
+        run: ./build/install-osxcross.sh  && ./build/build-osx.sh -v ${{ steps.get_version.outputs.version }}
         # run: cd build && ./build-osx.sh
       - name: Release
         uses: softprops/action-gh-release@v1
