@@ -46,6 +46,7 @@ jobs:
   build-osx:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - run: ls
       - name: build for OSX
         run: cd build && ./build-osx.sh
