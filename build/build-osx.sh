@@ -24,7 +24,6 @@ echo "the path is"
 $PATH
 
 ## begin compilation
-cd ..
 cargo build --release --target x86_64-apple-darwin
 mkdir -p release
 ls
