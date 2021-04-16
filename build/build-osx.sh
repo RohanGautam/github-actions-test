@@ -17,6 +17,8 @@ export CC=o64-clang
 export CXX=o64-clang++
 
 cargo build --release --target "${MACOS_TARGET}"
+mkdir -p release
+tar -cJf release/github-actions-test.xyz.x86_64-apple-darwin.tar.xz target/x86_64-apple-darwin/release/github-actions-test
 
 echo
 echo Done
