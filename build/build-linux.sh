@@ -16,6 +16,6 @@ cargo install cross
 
 
 
-cross build --target $TARGET --release
+cross build --target $TARGET --features local-redir --release
 mkdir -p release
 tar -cJf release/github-actions-test.$VERSION.$TARGET.tar.xz target/$TARGET/github-actions-test

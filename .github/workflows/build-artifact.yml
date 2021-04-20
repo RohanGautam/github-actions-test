@@ -26,9 +26,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install cross
-        run: cargo install cross
-
       - id: get_version
         uses: battila7/get-version-action@v2
 
