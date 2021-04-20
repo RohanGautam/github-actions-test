@@ -36,10 +36,7 @@ jobs:
 
       - name: Build and package ${{ matrix.target }}
         timeout-minutes: 120
-        run: |
-          cross build --target ${{ matrix.target }} --release
-          mkdir -p release
-          tar -cJf release/github-actions-test.${{ steps.get_version.outputs.version }}.${{ matrix.target }}.tar.xz target/${{ matrix.target }}/release/github-actions-test
+        run: ./build/build-linux.sh -v ${{ steps.get_version.outputs.version }} -t ${{ matrix.target }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
