@@ -15,7 +15,8 @@ sudo apt-get install pkg-config libssl-dev
 cargo install cross
 
 echo "building for $TARGET"
-
+# OPENSSL_LIB_DIR="/usr/lib/x86_64-linux-gnu" 
+# OPENSSL_INCLUDE_DIR="/usr/include/openssl"
 cross build --target $TARGET --release
-# mkdir -p release
-# tar -cJf release/github-actions-test.$VERSION.$TARGET.tar.xz target/$TARGET/github-actions-test
+mkdir -p release
+tar -cJf release/github-actions-test.$VERSION.$TARGET.tar.xz target/$TARGET/github-actions-test
