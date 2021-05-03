@@ -63,7 +63,7 @@ jobs:
       - name: Build and package osx
         timeout-minutes: 120
         run: |
-          cargo build --target --release
+          cargo build --release
           mkdir -p release
           tar -cJf release/github-actions-test.${{ steps.get_version.outputs.version }}.x86_64-apple-darwin.tar.xz target/release/github-actions-test
       - name: Release
