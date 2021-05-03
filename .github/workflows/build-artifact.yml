@@ -29,8 +29,10 @@ jobs:
 
       - name: Build and package ${{ matrix.target }}
         timeout-minutes: 120
-        run: ./build/build-linux.sh -v ${{ steps.get_version.outputs.version }} -t ${{ matrix.target }}
-
+        run: |
+          cross build --target ${{ matrix.target }} --release
+          mkdir -p release
+          tar -cJf release/github-actions-test.${{ steps.get_version.outputs.version }}.${{ matrix.target }}.tar.xz target/${{ matrix.target }}/release/github-actions-test
       - name: Release
         uses: softprops/action-gh-release@v1
         env:
@@ -38,19 +40,19 @@ jobs:
         with:
           files: release/*
 
-  build-osx:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - id: get_version
-        uses: battila7/get-version-action@v2
+  # build-osx:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - id: get_version
+  #       uses: battila7/get-version-action@v2
 
-      - name: build for OSX
-        run: ./build/install-osxcross.sh  && ./build/build-osx.sh -v ${{ steps.get_version.outputs.version }}
-        # run: cd build && ./build-osx.sh
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          files: release/*
+  #     - name: build for OSX
+  #       run: ./build/install-osxcross.sh  && ./build/build-osx.sh -v ${{ steps.get_version.outputs.version }}
+  #       # run: cd build && ./build-osx.sh
+  #     - name: Release
+  #       uses: softprops/action-gh-release@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         files: release/*
