@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         target:
-          # - x86_64-unknown-linux-musl
+          - x86_64-unknown-linux-musl
           - x86_64-unknown-linux-gnu
 
     steps:
@@ -41,19 +41,19 @@ jobs:
         with:
           files: release/*
 
-  # build-osx:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - id: get_version
-  #       uses: battila7/get-version-action@v2
+  build-osx:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: get_version
+        uses: battila7/get-version-action@v2
 
-  #     - name: build for OSX
-  #       run: ./build/install-osxcross.sh  && ./build/build-osx.sh -v ${{ steps.get_version.outputs.version }}
-  #       # run: cd build && ./build-osx.sh
-  #     - name: Release
-  #       uses: softprops/action-gh-release@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         files: release/*
+      - name: build for OSX
+        run: ./build/install-osxcross.sh  && ./build/build-osx.sh -v ${{ steps.get_version.outputs.version }}
+        # run: cd build && ./build-osx.sh
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: release/*
