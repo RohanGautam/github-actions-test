@@ -52,10 +52,10 @@ jobs:
           # echo "::add-path::/usr/local/opt/gnu-tar/libexec/gnubin"
           echo "/usr/local/opt/gnu-tar/libexec/gnubin" >> $GITHUB_PATH
 
-      - name: Install Rust nightly
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
+      # - name: Install Rust nightly
+      #   uses: actions-rs/toolchain@v1
+      #   with:
+      #     profile: minimal
 
       - id: get_version
         uses: battila7/get-version-action@v2
