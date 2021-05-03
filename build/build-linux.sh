@@ -14,7 +14,7 @@ done
 sudo apt-get install pkg-config libssl-dev
 cargo install cross
 
-
+echo "building for $TARGET"
 
 cross build --target $TARGET --release
 # mkdir -p release
