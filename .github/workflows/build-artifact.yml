@@ -26,6 +26,7 @@ jobs:
         uses: battila7/get-version-action@v2
 
       - run: echo ${{ steps.get_version.outputs.version }}
+      - run: cargo install cross
 
       - name: Build and package ${{ matrix.target }}
         timeout-minutes: 120
